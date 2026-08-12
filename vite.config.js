@@ -17,7 +17,8 @@ export default defineConfig({
         portalLanding: resolve(__dirname, 'rtm-portal-landing.html'),
         processWorkflow: resolve(__dirname, 'rtm-process-workflow.html'),
         travelRequestForm: resolve(__dirname, 'rtm-travel-request-form.html'),
-        sarsDeclaration: resolve(__dirname, 'sars-online-traveller-declaration-business-travel.html')
+        sarsDeclaration: resolve(__dirname, 'sars-online-traveller-declaration-business-travel.html'),
+        privacyPolicy: resolve(__dirname, 'privacy-policy.html')
       }
     }
   }
