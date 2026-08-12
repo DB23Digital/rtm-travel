@@ -37,6 +37,15 @@ html[data-hero="classic"] #hero-section {
   display: none;
 }
 
+/* Floating WhatsApp button sits fixed bottom-right on every page; on narrow
+   viewports reserve clearance in article prose so body text is never
+   rendered underneath it, whatever the scroll position. */
+@media (max-width: 640px) {
+  .wa-clearance {
+    padding-right: 4.5rem;
+  }
+}
+
 /* Parallax Hero Styles */
 #hero {
   height: 100vh;
