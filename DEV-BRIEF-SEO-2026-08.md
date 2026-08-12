@@ -6,6 +6,34 @@
 **Health score:** 74/100 · **Local SEO score:** 28/100 (unweighted, flagged separately)
 **Stack:** Vite static build, `base: './'`, no templating/partials — each page's `<head>`/nav/footer is duplicated HTML in its own source file (`index.html`, `corporate-travel-management.html`, etc. in repo root → built to `dist/`)
 
+---
+
+## Remediation status — 12 Aug 2026 (same-day)
+
+All dev-doable Critical + High + selected Medium items shipped same day as the audit. Commits `7e1f184`→`c656ef2` (6 commits, source + `dist/` sync). Deploy zip `rtmtravel-cpanel-2026-08-12.zip` built and verified (forward-slash paths, all 811 files). **Not yet pushed to `origin/main`** and **not yet uploaded to cPanel** — both are user actions.
+
+| # | Item | Status |
+|---|---|---|
+| C1 | Site not indexed by Google | ✅ Client requested indexing in GSC |
+| C2 | Local SEO / trust signals | ⏳ GBP claim submitted, awaiting Google approval |
+| C3 | Privacy Policy page | ✅ Built (`privacy-policy.html`), linked site-wide + POPIA checkbox — **draft, needs legal sign-off before treating as final** |
+| C4 | Policy template delivers no download | ✅ Built (`/downloads/corporate-travel-policy-template.html`, fillable print/PDF), CTA added above the fold |
+| H1 | Blog hero JPEGs killing mobile LCP | ✅ Converted to WebP (760KB–1.6MB → 60–95KB), fetchpriority added |
+| H2 | Hero LCP image invisible to preload scanner | ✅ Preload tags added (both breakpoints) |
+| H3 | No footer NAP / tel/mailto anywhere | ✅ Added to all 7 content pages |
+| H4 | Duplicate/incomplete schema on pillar page | ✅ Removed |
+| H5 | Pillar page not linking its own spokes; SARS orphaned | ✅ Inline pillar→spoke links added; SARS added to footer + reciprocal link from Duty of Care |
+| M1 | FAQPage schema missing on 4 pages | ✅ Added (index, pillar, policy-template, budget) |
+| M2 | Pillar page thin content | ❌ Not done — content/copywriting task |
+| M3 | No CSP header | ❌ Not done — needs inline-script audit + `.htaccess` change, left for a dedicated pass |
+| M4 | Utility pages missing canonical/schema | ✅ Resolved as noindex (client confirmed client-only tool pages) + removed from sitemap |
+| M5 | Homepage schema missing social profiles | ✅ Instagram added to `sameAs`; LinkedIn was already present |
+| M6 | GA4 organic reporting blocked (no Property ID) | ✅ Property ID `546281681` obtained, saved to project notes (not the repo) |
+| M7 | WhatsApp button mobile overlap; duplicate H1 | ✅ Mobile clearance added; duplicate hidden H1 downgraded to `<p>` |
+| L1–L10 | Backlog | ❌ Not started |
+
+**AEO-ANALYSIS.md rewrites** (homepage definition block, pricing passage, response-SLA passage, WhatsApp click-to-chat, Duty of Care / policy rewrites) — confirmed already live on the site from an earlier pass, verified intact during this remediation.
+
 **How to use this doc:** items are grouped Critical → High → Medium → Low, matching the audit. Each has the file(s) to touch, the exact change, and how to confirm it worked. Where a fix must be repeated across pages, that's called out explicitly — **this site has no shared header/footer component, so footer/nav edits mean editing all 10 root `*.html` files individually**, not one partial.
 
 Root page files (10, each with matching `dist/*.html` build output):
