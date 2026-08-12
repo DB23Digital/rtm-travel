@@ -28,6 +28,15 @@
   }
 }
 
+/* Hero A/B preview toggle: only one hero variant renders at a time */
+html[data-hero="film"] #hero-section-classic {
+  display: none;
+}
+
+html[data-hero="classic"] #hero-section {
+  display: none;
+}
+
 /* Parallax Hero Styles */
 #hero {
   height: 100vh;

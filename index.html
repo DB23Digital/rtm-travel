@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <!-- Hero A/B preview toggle: ?hero=classic shows the original hero, default is the scroll film. Runs before paint to avoid a flash of both. -->
+    <script>
+      document.documentElement.dataset.hero = new URLSearchParams(location.search).get('hero') === 'classic' ? 'classic' : 'film';
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBPC12M3JF"></script>
     <script>
@@ -19,7 +23,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./assets/favicon.png">
 
     <!-- Google Search Console Verification -->
@@ -204,9 +208,23 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="hero-section" class="relative h-screen w-full overflow-hidden bg-black">
-        <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full object-cover z-0"></canvas>
+    <!-- Hero preview toggle: client-facing A/B switch between the classic hero and the scroll film -->
+    <div id="hero-version-toggle" class="fixed z-[60] top-20 right-4 flex items-center gap-1 p-1 rounded-full bg-rtm-dark/90 border border-white/15 backdrop-blur-lg text-xs font-medium shadow-lg">
+        <a href="?" class="hero-toggle-option px-3 py-1.5 rounded-full transition-colors">Scroll Film</a>
+        <a href="?hero=classic" class="hero-toggle-option px-3 py-1.5 rounded-full transition-colors">Classic</a>
+    </div>
+    <style>
+        #hero-version-toggle .hero-toggle-option { color: rgba(255,255,255,0.55); }
+        html[data-hero="film"] #hero-version-toggle a[href="?"],
+        html[data-hero="classic"] #hero-version-toggle a[href="?hero=classic"] {
+            background: #3fd9c6;
+            color: #060c17;
+        }
+    </style>
+
+    <!-- Classic hero: the original title + CTA hero, kept for side-by-side client review -->
+    <section id="hero-section-classic" class="relative h-screen w-full overflow-hidden bg-black">
+        <canvas id="hero-canvas-classic" class="absolute top-0 left-0 w-full h-full object-cover z-0"></canvas>
 
         <!-- Gradient Overlay for readability -->
         <div class="absolute inset-0 bg-black/35 z-10"></div>
@@ -216,15 +234,15 @@
             class="container mx-auto px-4 relative z-20 h-full flex flex-col justify-center items-center md:items-end text-center md:text-left pt-20">
             <div class="hero-copy-panel px-6 py-8 md:px-10 md:py-10">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight opacity-0 translate-y-10"
-                    id="hero-title">
+                    id="hero-title-classic">
                     Corporate Travel <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Management Cape Town</span>
                 </h1>
                 <p class="text-lg md:text-xl text-white mb-10 max-w-2xl mx-auto md:mx-0 opacity-0 translate-y-10"
-                    id="hero-subtitle">
+                    id="hero-subtitle-classic">
                     Outsource the chaos. We provide certainty, control, and responsiveness for finance teams and executives.
                 </p>
-                <div class="flex flex-col md:flex-row justify-center md:justify-start gap-4 opacity-0 translate-y-10" id="hero-cta">
+                <div class="flex flex-col md:flex-row justify-center md:justify-start gap-4 opacity-0 translate-y-10" id="hero-cta-classic">
                     <a href="#contact" class="btn-primary">Request Consult</a>
                     <a href="#services" class="btn-secondary">View Services</a>
                 </div>
@@ -240,9 +258,103 @@
         </div>
     </section>
 
+    <!-- Hero Section: scroll-scrubbed film, aircraft window -> four landmarks -> cabin -->
+    <section id="hero-section" aria-label="RTM Travel journey">
+        <div class="hero-stage">
+            <canvas id="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-scrim" aria-hidden="true"></div>
+            <div class="hero-dots" aria-hidden="true"></div>
+            <div class="hero-seam-fade" id="hero-seam-fade" aria-hidden="true"></div>
+
+            <!-- Boot loader, hidden once frame 0 + canvas are live -->
+            <div class="hero-loader" id="hero-loader" aria-hidden="true">
+                <div class="hero-loader-track">
+                    <div class="hero-loader-bar" id="hero-loader-bar"></div>
+                </div>
+            </div>
+
+            <!-- Fixed chapter readout: landmark name + flight-path progress -->
+            <div class="hero-chapter-readout" id="hero-chapter-readout">
+                <svg class="hero-arc" viewBox="0 0 34 34" aria-hidden="true">
+                    <path id="hero-arc-path" d="M4 26 C 4 10, 30 24, 30 8" fill="none" stroke="rgba(238,246,245,0.25)" stroke-width="1.5" />
+                    <circle id="hero-arc-marker" cx="4" cy="26" r="3.2" fill="#3fd9c6" />
+                </svg>
+                <div class="hero-chapter-text">
+                    <span class="hero-chapter-label" id="hero-chapter-label">Departure</span>
+                    <div class="hero-chapter-track">
+                        <div class="hero-chapter-fill" id="hero-chapter-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opening title card, over the passenger window scene -->
+            <div class="hero-panel" data-chapter-index="0" style="--panel-bg:url('./assets/hero-film/1280/frame_000.jpg')">
+                <div class="hero-panel-inner">
+                    <p class="hero-eyebrow">Somewhere over the clouds</p>
+                    <h1>This is what corporate travel looks like when nobody's managing it.</h1>
+                </div>
+            </div>
+
+            <!-- Four landmark panels: real DOM headings, readable with zero JS -->
+            <div class="hero-panel" data-chapter-index="1" style="--panel-bg:url('./assets/hero-film/1280/frame_116.jpg')">
+                <div class="hero-panel-inner">
+                    <p class="hero-eyebrow">The multi-leg trip</p>
+                    <h2>Three countries, one trip, and a cost nobody can see.</h2>
+                    <p class="hero-body">Flights booked leg by leg across different suppliers. By the time the trip lands, finance has no single view of what it actually cost.</p>
+                    <div class="hero-tags">
+                        <span>Fragmented fares</span>
+                        <span>No spend visibility</span>
+                        <span>Multiple suppliers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel" data-chapter-index="2" style="--panel-bg:url('./assets/hero-film/1280/frame_150.jpg')">
+                <div class="hero-panel-inner">
+                    <p class="hero-eyebrow">The approval queue</p>
+                    <h2>The fare climbs while the request sits in an inbox.</h2>
+                    <p class="hero-body">A trip approval can wait days for a signature. Every one of those days, the fare on that flight keeps moving.</p>
+                    <div class="hero-tags">
+                        <span>Approval delays</span>
+                        <span>Rising fares</span>
+                        <span>Policy sign-off</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel" data-chapter-index="3" style="--panel-bg:url('./assets/hero-film/1280/frame_240.jpg')">
+                <div class="hero-panel-inner">
+                    <p class="hero-eyebrow">Long-haul, alone</p>
+                    <h2>It's 2am in New York and there's nobody to call.</h2>
+                    <p class="hero-body">Long-haul puts a traveller nine time zones from home. When something goes wrong at 2am, they need a person, not a ticket number.</p>
+                    <div class="hero-tags">
+                        <span>Time zones</span>
+                        <span>Duty of care</span>
+                        <span>24/7 support</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel" data-chapter-index="4" style="--panel-bg:url('./assets/hero-film/1280/frame_295.jpg')">
+                <div class="hero-panel-inner">
+                    <p class="hero-eyebrow">Coming home</p>
+                    <h2>One invoice. Reconciled. Policy-compliant. Done.</h2>
+                    <p class="hero-body">The trip is over before finance even sees it: one line, correctly coded, already checked against policy.</p>
+                    <div class="hero-tags">
+                        <span>Single invoice</span>
+                        <span>Policy compliant</span>
+                        <span>Reconciled automatically</span>
+                    </div>
+                    <a href="#contact" class="hero-cta">Talk to us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Value Proposition: Why RTM? (New Section) -->
     <section id="about" class="py-20 bg-rtm-card/30 relative">
-        <div class="container mx-auto px-4 md:px-8">
+        <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:18vh;background:linear-gradient(to bottom, #453d37, transparent);pointer-events:none;"></div>
+        <div class="container mx-auto px-4 md:px-8 relative">
             <div class="text-center mb-16 max-w-3xl mx-auto">
                 <p class="text-sm text-rtm-accent uppercase tracking-widest font-semibold mb-4">About Remmitz Travel Management</p>
                 <h2 class="text-3xl md:text-5xl font-bold mb-4">Corporate Travel Management South Africa</h2>

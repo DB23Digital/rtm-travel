@@ -1,45 +1,60 @@
 import './style.css'
+import './hero-film.css'
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { mountHeroFilm } from './hero-film.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RTM Travel website loaded');
 
-    const baseUrl = import.meta.env.BASE_URL || './';
-    const getImageUrl = (index) => {
-        const paddedIndex = (index + 1).toString().padStart(3, '0');
-        return `${baseUrl}ezgif-frame-${paddedIndex}.jpg`;
-    };
+    const heroMode = document.documentElement.dataset.hero === 'classic' ? 'classic' : 'film';
 
-    // --- GSAP Hero Animation ---
-    const canvas = document.getElementById("hero-canvas");
-    if (canvas) {
-        const context = canvas.getContext("2d");
+    // --- Scroll-film hero (aircraft window -> four landmarks -> cabin) ---
+    const heroSection = document.getElementById('hero-section');
+    if (heroMode === 'film' && heroSection) {
+        try {
+            mountHeroFilm(heroSection);
+        } catch (err) {
+            console.error('hero-film failed to boot, staying on static fallback', err);
+        }
+    }
+
+    // --- Classic hero (kept for the client-facing A/B preview toggle) ---
+    const classicCanvas = document.getElementById('hero-canvas-classic');
+    if (heroMode === 'classic' && classicCanvas) {
+        const context = classicCanvas.getContext('2d');
         const frameCount = 40;
         const currentFrame = { index: 0 };
         const images = [];
+        const baseUrl = import.meta.env.BASE_URL || './';
+        const getImageUrl = (index) => `${baseUrl}ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`;
+
+        const render = () => {
+            if (!images[currentFrame.index]) return;
+            const img = images[currentFrame.index];
+            const scale = Math.max(classicCanvas.width / img.width, classicCanvas.height / img.height);
+            const x = (classicCanvas.width / 2) - (img.width / 2) * scale;
+            const y = (classicCanvas.height / 2) - (img.height / 2) * scale;
+            context.clearRect(0, 0, classicCanvas.width, classicCanvas.height);
+            context.drawImage(img, x, y, img.width * scale, img.height * scale);
+        };
 
         const loadFrame = (i) => {
             const img = new Image();
             img.onload = () => {
                 if (i === 0) {
                     render();
-                    gsap.to("#hero-title, #hero-subtitle, #hero-cta", {
+                    gsap.to('#hero-title-classic, #hero-subtitle-classic, #hero-cta-classic', {
                         opacity: 1,
                         y: 0,
                         duration: 1,
                         stagger: 0.2,
-                        ease: "power2.out"
+                        ease: 'power2.out'
                     });
-
-                    // Let the browser finish above-the-fold rendering before
-                    // downloading the remaining animation frames.
                     const preloadRemainingFrames = () => {
-                        for (let next = 1; next < frameCount; next++) {
-                            loadFrame(next);
-                        }
+                        for (let next = 1; next < frameCount; next++) loadFrame(next);
                     };
                     if ('requestIdleCallback' in window) {
                         window.requestIdleCallback(preloadRemainingFrames, { timeout: 1500 });
@@ -51,27 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
             img.src = getImageUrl(i);
             images[i] = img;
         };
-
-        // Load only the first frame on the critical rendering path.
         loadFrame(0);
 
-        const render = () => {
-            if (!images[currentFrame.index]) return;
-
-            // "cover" fit logic
-            const img = images[currentFrame.index];
-            const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-            const x = (canvas.width / 2) - (img.width / 2) * scale;
-            const y = (canvas.height / 2) - (img.height / 2) * scale;
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(img, x, y, img.width * scale, img.height * scale);
-        };
-
-        // Resize handler
         const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            classicCanvas.width = window.innerWidth;
+            classicCanvas.height = window.innerHeight;
             render();
         };
         let resizeFrame;
@@ -79,44 +78,20 @@ document.addEventListener('DOMContentLoaded', () => {
             window.cancelAnimationFrame(resizeFrame);
             resizeFrame = window.requestAnimationFrame(resizeCanvas);
         });
-        resizeCanvas(); // init
+        resizeCanvas();
 
-        // ScrollTrigger
         gsap.to(currentFrame, {
             index: frameCount - 1,
-            snap: "index",
-            ease: "none",
+            snap: 'index',
+            ease: 'none',
             scrollTrigger: {
-                trigger: "#hero-section",
-                start: "top top",
-                end: "+=200%", // Scroll distance to complete animation
-                scrub: 0.5, // Smooth scrubbing
-                pin: true,  // Pin the hero section during scroll
-                // markers: true, // Uncomment for debug
+                trigger: '#hero-section-classic',
+                start: 'top top',
+                end: '+=200%',
+                scrub: 0.5,
+                pin: true,
             },
             onUpdate: render
-        });
-    } else {
-        const backgroundLayer = document.querySelector('.background-layer');
-        const midgroundLayer = document.querySelector('.midground-layer');
-
-        if (backgroundLayer) {
-            backgroundLayer.style.backgroundImage = `url("${getImageUrl(0)}")`;
-        }
-
-        if (midgroundLayer) {
-            midgroundLayer.style.backgroundImage = `url("${getImageUrl(19)}")`;
-        }
-
-        gsap.fromTo("#hero h1, #hero p, #hero .btn-primary, #hero .btn-secondary", {
-            opacity: 0,
-            y: 32
-        }, {
-            opacity: 1,
-            y: 0,
-            duration: 0.9,
-            stagger: 0.12,
-            ease: "power2.out"
         });
     }
 
