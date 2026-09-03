@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "sitemap": "node generate_sitemap.cjs",
+    "prebuild": "node generate_sitemap.cjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

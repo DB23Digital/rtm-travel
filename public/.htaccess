@@ -32,7 +32,13 @@ RewriteCond %{REQUEST_FILENAME}\.html -f
 RewriteRule ^(.*)$ $1.html [L]
 
 # Serve a proper 404 header for non-existent routes
-ErrorDocument 404 /index.html
+ErrorDocument 404 /404.html
+
+# ── 3b. Lead capture storage ────────────────────────────────────────────────
+# download.php writes the lead CSV and its signing key above the web root. If the
+# host does not allow that, it falls back to a directory here, which must never
+# be served.
+RedirectMatch 404 ^/rtm-private(/|$)
 
 # ── 4. Cache static assets ──────────────────────────────
 <IfModule mod_expires.c>
@@ -46,6 +52,7 @@ ErrorDocument 404 /index.html
   ExpiresByType image/svg+xml              "access plus 1 year"
   ExpiresByType image/x-icon              "access plus 1 year"
   ExpiresByType font/woff2                 "access plus 1 year"
+  # Gated downloads are served by download.php with no-store, so nothing to add here.
 </IfModule>
 
 # ── 5. Compression ──────────────────────────────────────

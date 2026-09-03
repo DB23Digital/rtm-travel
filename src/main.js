@@ -208,4 +208,81 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // Handle the gated template download form (may appear more than once per page)
+    document.querySelectorAll('.template-gate-form').forEach((gateForm) => {
+        const wrapper = gateForm.parentElement;
+        const errorState = gateForm.querySelector('.gate-error');
+        const successState = wrapper.querySelector('.gate-success');
+        const linkList = wrapper.querySelector('.gate-links');
+        const submitBtn = gateForm.querySelector('button[type="submit"]');
+        const btnText = submitBtn.querySelector('span');
+
+        gateForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorState.classList.add('hidden');
+
+            const formData = new FormData(gateForm);
+            const data = {
+                name: (formData.get('name') || '').trim(),
+                email: (formData.get('email') || '').trim(),
+                company: (formData.get('company') || '').trim(),
+                consent: formData.get('consent') === 'yes',
+                website: formData.get('website') || '',
+                source: gateForm.dataset.source || 'policy-template',
+            };
+
+            if (!data.name || !data.email || !data.company) {
+                errorState.textContent = 'Please complete all three fields.';
+                errorState.classList.remove('hidden');
+                return;
+            }
+            // POPIA: the box starts unticked, so an untouched form must not submit.
+            if (!data.consent) {
+                errorState.textContent = 'Please tick the consent box so we may send you the template.';
+                errorState.classList.remove('hidden');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+
+            try {
+                const response = await fetch('download.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                const result = await response.json();
+
+                if (!response.ok || result.status !== 'success') {
+                    throw new Error(result.message || 'Error submitting form');
+                }
+
+                linkList.innerHTML = '';
+                (result.files || []).forEach((file) => {
+                    const a = document.createElement('a');
+                    a.href = file.url;
+                    a.textContent = file.label;
+                    a.className = 'btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-sm';
+                    linkList.appendChild(a);
+                });
+
+                gateForm.classList.add('hidden');
+                successState.classList.remove('hidden');
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'template_download', { source: data.source });
+                }
+            } catch (error) {
+                console.error('Template gate error:', error);
+                errorState.textContent = error.message || 'Something went wrong. Please try again, or email anthea@rtmtravel.co.za.';
+                errorState.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send me the template';
+            }
+        });
+    });
+
 });

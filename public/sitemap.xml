@@ -2,50 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://rtmtravel.co.za/</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://rtmtravel.co.za/corporate-travel-management</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://rtmtravel.co.za/articles</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://rtmtravel.co.za/duty-of-care-business-travel</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://rtmtravel.co.za/corporate-travel-policy-template</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://rtmtravel.co.za/corporate-travel-budget-south-africa</loc>
-    <lastmod>2026-07-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://rtmtravel.co.za/sars-online-traveller-declaration-business-travel</loc>
-    <lastmod>2026-07-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-09-02</lastmod>
   </url>
   <url>
     <loc>https://rtmtravel.co.za/privacy-policy</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/business-accommodation</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/conference-event-travel</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/corporate-flight-booking</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/corporate-travel-management</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/duty-of-care-business-travel</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/corporate-travel-policy-template</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/travel-policy-approval-management</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/corporate-travel-budget-south-africa</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/in-house-vs-travel-management-company</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/corporate-travel-management-johannesburg</loc>
+    <lastmod>2026-09-02</lastmod>
+  </url>
+  <url>
+    <loc>https://rtmtravel.co.za/sars-online-traveller-declaration-business-travel</loc>
+    <lastmod>2026-09-02</lastmod>
   </url>
 </urlset>

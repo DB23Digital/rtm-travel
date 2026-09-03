@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -26,12 +26,15 @@
     <meta property="og:url" content="https://rtmtravel.co.za/corporate-travel-policy-template" />
     <meta property="og:title" content="How to Write a Corporate Travel Policy for Your South African Business | RTM Travel" />
     <meta property="og:description" content="A practical guide with checklist for writing a corporate travel policy. Covers booking rules, expense limits, approval workflows, and how a TMC enforces policy automatically." />
-    <meta property="og:image" content="https://rtmtravel.co.za/assets/blog-travel-policy-hero.webp" />
+    <meta property="og:image" content="https://rtmtravel.co.za/assets/og-card-policy.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_ZA" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="How to Write a Corporate Travel Policy for Your South African Business" />
     <meta name="twitter:description" content="Practical guide with checklist — booking rules, expense limits, approval workflows, and how a TMC enforces policy automatically." />
-    <meta name="twitter:image" content="https://rtmtravel.co.za/assets/blog-travel-policy-hero.webp" />
+    <meta name="twitter:image" content="https://rtmtravel.co.za/assets/og-card-policy.jpg" />
     <script type="application/ld+json">
     [
       {
@@ -41,11 +44,12 @@
         "description": "A practical guide to writing a corporate travel policy for South African businesses. Covers booking rules, expense limits, approval workflows, and how to enforce policy automatically with a TMC.",
         "url": "https://rtmtravel.co.za/corporate-travel-policy-template",
         "datePublished": "2026-05-27",
-        "dateModified": "2026-07-20",
+        "dateModified": "2026-09-02",
         "author": {
           "@type": "Person",
           "@id": "https://rtmtravel.co.za/#founder",
           "name": "Anthea Ronne",
+          "image": "https://rtmtravel.co.za/assets/anthea-ronne.webp",
           "jobTitle": "Owner & CEO",
           "worksFor": { "@id": "https://rtmtravel.co.za/#business" },
           "sameAs": "https://www.linkedin.com/in/anthea-ronne-37aa1811/"
@@ -173,7 +177,7 @@
             </div>
             <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">How to Write a Corporate Travel Policy for Your South African Business</h1>
             <p class="text-lg text-gray-300 max-w-2xl mb-8">The single most effective document your company can implement to reduce travel spend, eliminate policy leakage, and protect your people on the road.</p>
-            <a href="/downloads/corporate-travel-policy-template.html" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-2 mb-8">
+            <a href="#get-the-template" class="btn-primary inline-flex items-center gap-2 mb-8">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download the Template
             </a>
@@ -183,6 +187,8 @@
                 <time datetime="2026-05-27">May 27, 2026</time>
                 <span>·</span>
                 <span>9 min read</span>
+                <span>&middot;</span>
+                <span>Last reviewed <time datetime="2026-09-02">2 September 2026</time></span>
             </div>
         </div>
     </section>
@@ -242,6 +248,53 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Lead gate for the policy template. Handled by .template-gate-form in src/main.js, POSTed to public/download.php. -->
+                <div id="get-the-template" class="bg-rtm-card border border-rtm-accent/30 rounded-xl p-6 md:p-8 my-12 scroll-mt-24">
+                    <p class="text-xs text-rtm-accent uppercase tracking-widest mb-2">Free download</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3">Get the fill-in-the-field policy template</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Every element on this page, laid out as a document you can complete and circulate. Word version to edit, printable version to sign. Three fields, no phone call.</p>
+                    <form class="template-gate-form grid grid-cols-1 md:grid-cols-3 gap-4" data-source="policy-article-mid" novalidate>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-mid-name">Name</label>
+                            <input id="gate-mid-name" name="name" type="text" autocomplete="name" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="Thandi Mokoena" />
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-mid-email">Work email</label>
+                            <input id="gate-mid-email" name="email" type="email" autocomplete="email" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="thandi@company.co.za" />
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-mid-company">Company</label>
+                            <input id="gate-mid-company" name="company" type="text" autocomplete="organization" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="Company (Pty) Ltd" />
+                        </div>
+                        <!-- Honeypot: real people never fill this in. -->
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+                        <div class="md:col-span-3">
+                            <label class="flex items-start gap-3 text-xs text-gray-400 leading-relaxed">
+                                <input type="checkbox" name="consent" value="yes" required
+                                    class="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-white/20 bg-rtm-dark accent-rtm-accent" />
+                                <span>I consent to RTM Travel storing my name, work email and company, and contacting me about corporate travel management. I may withdraw consent at any time. See the <a href="privacy-policy" class="text-rtm-accent hover:underline">privacy policy</a>.</span>
+                            </label>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap items-center gap-4">
+                            <button type="submit" class="btn-primary inline-flex items-center gap-2 px-6 py-3">
+                                <span>Send me the template</span>
+                            </button>
+                            <p class="gate-error hidden text-sm text-red-400" role="alert"></p>
+                        </div>
+                    </form>
+                    <div class="gate-success hidden mt-6 border-t border-white/10 pt-6" role="status" aria-live="polite">
+                        <p class="text-white font-semibold mb-3">Thank you &mdash; your template is ready.</p>
+                        <div class="gate-links flex flex-wrap gap-4"></div>
+                        <p class="text-xs text-gray-500 mt-4">These links expire in an hour. Word version for editing, printable version for signing.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6 mb-12">
                     <div class="bg-rtm-card rounded-xl p-6 border border-white/5">
                         <div class="flex items-start gap-4">
                             <span class="text-2xl font-bold text-rtm-accent flex-shrink-0">04</span>
@@ -329,6 +382,66 @@
                     </div>
                 </div>
 
+
+                <!-- Lead gate for the policy template. Handled by .template-gate-form in src/main.js, POSTed to public/download.php. -->
+                <div id="get-the-template-end" class="bg-rtm-card border border-rtm-accent/30 rounded-xl p-6 md:p-8 my-12 scroll-mt-24">
+                    <p class="text-xs text-rtm-accent uppercase tracking-widest mb-2">Free download</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-3">Get the fill-in-the-field policy template</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Take the template with you. Fill in your own booking windows, rate caps and approvers, and you have a working policy by the end of the day.</p>
+                    <form class="template-gate-form grid grid-cols-1 md:grid-cols-3 gap-4" data-source="policy-article-end" novalidate>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-end-name">Name</label>
+                            <input id="gate-end-name" name="name" type="text" autocomplete="name" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="Thandi Mokoena" />
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-end-email">Work email</label>
+                            <input id="gate-end-email" name="email" type="email" autocomplete="email" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="thandi@company.co.za" />
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1" for="gate-end-company">Company</label>
+                            <input id="gate-end-company" name="company" type="text" autocomplete="organization" required
+                                class="w-full bg-rtm-dark border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-rtm-accent" placeholder="Company (Pty) Ltd" />
+                        </div>
+                        <!-- Honeypot: real people never fill this in. -->
+                        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+                        <div class="md:col-span-3">
+                            <label class="flex items-start gap-3 text-xs text-gray-400 leading-relaxed">
+                                <input type="checkbox" name="consent" value="yes" required
+                                    class="mt-0.5 h-4 w-4 flex-shrink-0 rounded border-white/20 bg-rtm-dark accent-rtm-accent" />
+                                <span>I consent to RTM Travel storing my name, work email and company, and contacting me about corporate travel management. I may withdraw consent at any time. See the <a href="privacy-policy" class="text-rtm-accent hover:underline">privacy policy</a>.</span>
+                            </label>
+                        </div>
+                        <div class="md:col-span-3 flex flex-wrap items-center gap-4">
+                            <button type="submit" class="btn-primary inline-flex items-center gap-2 px-6 py-3">
+                                <span>Send me the template</span>
+                            </button>
+                            <p class="gate-error hidden text-sm text-red-400" role="alert"></p>
+                        </div>
+                    </form>
+                    <div class="gate-success hidden mt-6 border-t border-white/10 pt-6" role="status" aria-live="polite">
+                        <p class="text-white font-semibold mb-3">Thank you &mdash; your template is ready.</p>
+                        <div class="gate-links flex flex-wrap gap-4"></div>
+                        <p class="text-xs text-gray-500 mt-4">These links expire in an hour. Word version for editing, printable version for signing.</p>
+                    </div>
+                </div>
+
+                <!-- Author block. Mirrors the Person node in the Article schema above. -->
+                <div class="mt-12 pt-8 border-t border-white/10">
+                    <div class="bg-rtm-card border border-white/5 rounded-xl p-6 flex flex-col sm:flex-row gap-6 items-start">
+                        <img loading="lazy" width="160" height="160" src="/assets/anthea-ronne.webp"
+                            alt="Anthea Ronne, founder of Remmitz Travel Management"
+                            class="w-20 h-20 rounded-full object-cover border-2 border-rtm-accent flex-shrink-0" />
+                        <div>
+                            <p class="text-xs text-rtm-accent uppercase tracking-widest mb-2">Written and reviewed by</p>
+                            <h3 class="text-lg font-bold text-white mb-2">Anthea Ronne</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed mb-3">Anthea Ronne has run Remmitz Travel Management since 2008, handling corporate travel programmes for South African businesses from Cape Town. RTM Travel is ASATA and IATA accredited, BEE Level 1, and 100% female owned.</p>
+                            <p class="text-sm text-gray-500">Last reviewed <time datetime="2026-09-02">2 September 2026</time>. <a href="https://www.linkedin.com/in/anthea-ronne-37aa1811/" target="_blank" rel="noopener noreferrer" class="text-rtm-accent hover:underline">Connect on LinkedIn</a></p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Related Articles -->
                 <div class="mt-10 pt-8 border-t border-white/10">
                     <h3 class="text-xl font-bold mb-6 text-white">Related Articles</h3>
@@ -360,7 +473,7 @@
     <!-- Footer -->
     <footer class="bg-black/30 pt-12 pb-8 border-t border-white/5">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
                 <div class="col-span-1 md:col-span-2">
                     <span class="text-2xl font-bold tracking-tighter mb-6 block">RTM<span class="text-rtm-accent">Travel</span></span>
                     <p class="text-gray-500 max-w-sm mb-6">Premium corporate travel management designed for the modern business world. Reliable, efficient, and always available.</p>
@@ -372,11 +485,30 @@
                         <p class="text-xs text-gray-400">In association with <a href="https://etravel.co.za" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">eTravel.co.za</a></p>
                         <p class="text-sm font-semibold text-rtm-accent">BEE Level 1</p>
                     </div>
-                    <div class="flex flex-col gap-2 text-gray-400 text-sm mt-4">
+                    <!-- Visible NAP block. Must stay character-for-character in step with the PostalAddress and telephone in the TravelAgency JSON-LD above, and with the Google Business Profile. -->
+                    <address class="not-italic flex flex-col gap-1 text-gray-400 text-sm mt-6">
+                        <span class="text-white font-semibold">Remmitz Travel Management</span>
+                        <span>Cape Town, Western Cape, 8001, South Africa</span>
                         <a href="tel:+27825746211" class="hover:text-white transition-colors">+27 82 574 6211</a>
                         <a href="mailto:anthea@rtmtravel.co.za" class="hover:text-white transition-colors">anthea@rtmtravel.co.za</a>
-                        <span>Cape Town, South Africa</span>
+                        <span class="text-gray-500">Monday to Friday, 08:00&ndash;17:00 SAST. 24/7 support for travellers in transit.</span>
+                        <span class="text-gray-500">Serving Cape Town, Johannesburg and South Africa.</span>
+                    </address>
+                    <div class="flex items-center gap-4 text-gray-400 text-sm mt-4">
+                        <a href="https://www.linkedin.com/company/remmitz-travel-management/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+                        <a href="https://www.instagram.com/rtm_travel/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
+                        <a href="https://www.google.com/search?kgmid=/g/11zdrsq7tp&hl=en-ZA&q=RTM+Travel" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Google</a>
                     </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="corporate-flight-booking" class="hover:text-white transition-colors">Corporate Flight Booking</a></li>
+                        <li><a href="conference-event-travel" class="hover:text-white transition-colors">Conference &amp; Event Travel</a></li>
+                        <li><a href="business-accommodation" class="hover:text-white transition-colors">Business Accommodation</a></li>
+                        <li><a href="travel-policy-approval-management" class="hover:text-white transition-colors">Policy &amp; Approval Management</a></li>
+                        <li><a href="corporate-travel-management-johannesburg" class="hover:text-white transition-colors">Johannesburg</a></li>
+                    </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Company</h4>
