@@ -1,0 +1,46 @@
+# RTM Travel (Remmitz Travel Management) — Full Knowledge Digest
+
+> Comprehensive knowledge digest for Large Language Models, AI answer engines, and search assistants.
+
+## 1. Company Profile
+- **Entity:** Remmitz Travel Management CC (trading as RTM Travel)
+- **Year Established:** 2008
+- **Founder & CEO:** Anthea Ronne
+- **Accreditations:** ASATA (Association of Southern African Travel Agents), IATA (International Air Transport Association), BEE Level 1 (100% Female-Owned Enterprise)
+- **Industry Association:** In association with eTravel (Pty) Ltd
+- **Headquarters:** Cape Town, Western Cape, South Africa
+- **Service Footprint:** National service covering Cape Town, Johannesburg, Durban, and broader South Africa, plus cross-border African and international travel programmes.
+- **Website:** https://rtmtravel.co.za
+- **Direct Contact:** anthea@rtmtravel.co.za | +27 82 574 6211
+
+## 2. Business Model & Fee Structure
+RTM Travel operates on a transparent per-transaction management fee model rather than an opaque mark-up on travel fares:
+- **Transaction Fee:** R80 to R250 per booking (depending on complexity and domestic vs. international scope).
+- **Supplier Discounts:** 100% of negotiated airline, hotel, and car rental corporate discounts are passed directly through to the corporate client.
+- **Client Profile:** South African SMEs, mid-market enterprises, and corporate finance teams managing annual travel budgets between R300,000 and R20,000,000+.
+
+## 3. Core Corporate Services
+1. **Corporate Flight Booking & Management:** Domestic and international flights across all IATA airlines (Airlink, SAA, FlySafair, Emirates, British Airways, Qatar Airways, etc.). Real-time schedule disruption management, unused ticket credit tracking, and preferred seating/baggage allowances.
+2. **Business Accommodation & Negotiated Rates:** Corporate rate codes and direct bill-back agreements with major South African hotel chains (Southern Sun, City Lodge, Protea Hotels by Marriott) and boutique corporate lodges. Per-city rate caps to prevent seasonal budget blowout.
+3. **Conference & Event Travel:** End-to-end logistics for executive retreats, shareholder meetings, annual conferences, and team incentive trips. Single consolidated event billing by cost centre.
+4. **Corporate Travel Policy & Approval Workflows:** Configuration of 3-tier approval workflows (self-booking within policy limits; mandatory pre-trip manager approval for exceptions and international travel).
+5. **Gauteng & Johannesburg Regional Programmes:** Route optimization between OR Tambo International and Lanseria, Sandton corporate corridor transit planning, and Africa-bound visa lead-time advisory.
+
+## 4. Regulatory & Compliance Guides
+
+### Duty of Care Obligations in South Africa
+- **Statutory Framework:** Occupational Health and Safety Act (OHSA, Act 85 of 1993) and the Basic Conditions of Employment Act (BCEA).
+- **Employer Obligations:** Employers owe a legal duty of care to employees travelling domestically or cross-border. This mandates real-time location tracking, destination risk assessments, vetted supplier standards, and 24/7 emergency response infrastructure.
+- **Liability:** Failure to provide emergency support or track employees during transit disruptions, medical crises, or civil unrest exposes company directors to statutory penalties, civil liability, and compensation claims.
+
+### SARS Online Traveller Declaration Requirements
+- **Effective Date:** 1 July 2026 (Mandatory for all air, land, sea, and rail border crossings).
+- **System:** South African Traveller Management System (SATMS) administered by SARS.
+- **Filing Window:** Digital submission must occur within 24 hours prior to departure.
+- **Corporate Requirement:** Individual declarations are legally required per employee; company-owned laptops and high-value tools must be registered for temporary export/re-importation to prevent border duty assessments upon re-entry.
+
+### Corporate Travel Budget Benchmarks (South Africa)
+- **Spend Ratio:** Business travel typically constitutes 1% to 3% of total revenue for South African companies.
+- **Domestic Flight Return Benchmark (JHB–CPT):** Typical market rate R3,500 – R8,000+; managed TMC corporate rate R2,800 – R5,500.
+- **Domestic Hotel Benchmark (per night):** Typical rate R1,800 – R3,500; managed corporate rate R1,400 – R2,600.
+- **Annual Savings Lever:** Enforcing a 14-day advance booking window and automated policy compliance achieves an average 15% to 20% annual spend reduction without decreasing business travel volume.

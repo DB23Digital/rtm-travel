@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBPC12M3JF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XBPC12M3JF');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>RTM Travel — Travel Request</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#061629;--navy-850:#08203c;--navy-800:#0b2748;--navy-700:#103056;
+    --teal:#3fd9c6;--teal-bright:#6cf0df;--teal-dim:#2aa698;
+    --text:#eaf3f8;--text-muted:#8aa3bd;--text-faint:#5d7088;
+    --border:rgba(99,179,201,.16);--border-strong:rgba(99,179,201,.34);
+    --panel:rgba(255,255,255,.025);--field:rgba(4,16,32,.55);--danger:#ff6b6b;--radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',sans-serif;color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(63,217,198,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(63,217,198,.06), transparent 55%),
+      linear-gradient(160deg,#071a30 0%,#061427 55%,#04101f 100%);
+    background-attachment:fixed;min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;
+    position:relative;overflow-x:hidden;
+  }
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:radial-gradient(rgba(125,180,210,.16) 1px, transparent 1.4px);background-size:22px 22px;
+    -webkit-mask-image:radial-gradient(900px 520px at 78% 16%, #000 0%, transparent 72%);
+    mask-image:radial-gradient(900px 520px at 78% 16%, #000 0%, transparent 72%);opacity:.5}
+  .wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:48px 24px 80px}
+  .arc{position:absolute;top:30px;right:24px;width:320px;height:200px;z-index:0;opacity:.85;pointer-events:none}
+
+  header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:8px;opacity:0;animation:rise .7s .05s forwards}
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand-mark{width:60px;height:60px;border-radius:50%;border:1.5px solid var(--teal);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-weight:700;letter-spacing:1px;font-size:18px;color:#fff;box-shadow:0 0 28px rgba(63,217,198,.18) inset}
+  .brand-name{font-size:13px;letter-spacing:3px;color:#fff;font-weight:600}
+  .brand-sub{font-size:9.5px;letter-spacing:4px;color:var(--teal);font-weight:500;margin-top:2px}
+  .bible-tag{font-size:10px;letter-spacing:3px;color:var(--teal-dim);font-weight:600;text-align:right;padding-top:6px}
+
+  .title-block{margin:30px 0 0;opacity:0;animation:rise .7s .15s forwards}
+  h1{font-weight:600;font-size:40px;line-height:1.05;letter-spacing:-.5px}
+  h1 .accent{color:var(--teal);display:block}
+  .lede{color:var(--text-muted);font-size:15px;max-width:560px;margin-top:18px;font-weight:400}
+  .titledash{width:54px;height:2px;background:var(--teal);margin-top:22px}
+
+  .refbar{display:flex;align-items:center;gap:10px;margin-top:26px;flex-wrap:wrap;opacity:0;animation:rise .7s .25s forwards}
+  .ref-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(63,217,198,.08);border:1px solid var(--border-strong);border-radius:999px;padding:7px 16px;font-size:12.5px;letter-spacing:1px;color:var(--teal-bright);font-weight:500}
+  .ref-chip b{color:#fff;font-weight:600;letter-spacing:1.5px}
+  .step-chip{font-size:11px;letter-spacing:2px;color:var(--text-muted);font-weight:500}
+
+  .section{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:26px 28px;margin-top:20px;backdrop-filter:blur(4px);opacity:0;animation:rise .7s forwards}
+  .section:nth-of-type(1){animation-delay:.30s}.section:nth-of-type(2){animation-delay:.35s}
+  .section:nth-of-type(3){animation-delay:.40s}.section:nth-of-type(4){animation-delay:.45s}
+  .section:nth-of-type(5){animation-delay:.50s}.section:nth-of-type(6){animation-delay:.55s}
+  .section:nth-of-type(7){animation-delay:.60s}.section:nth-of-type(8){animation-delay:.65s}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .ico{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--teal);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:var(--teal);background:rgba(63,217,198,.05)}
+  .ico svg{width:20px;height:20px}
+  .sec-title{font-size:17px;font-weight:500;letter-spacing:.3px}
+  .sec-note{font-size:12px;color:var(--text-muted);font-weight:400;margin-top:1px}
+
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr 1fr}
+  .mt{margin-top:16px}
+  .field label{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:7px}
+  .req{color:var(--danger);margin-left:3px}
+  input,select,textarea{width:100%;font-family:inherit;font-size:14px;color:var(--text);background:var(--field);border:1px solid var(--border);border-radius:9px;padding:11px 13px;transition:border-color .2s, box-shadow .2s;font-weight:400}
+  input::-moz-placeholder, textarea::-moz-placeholder{color:#5e768d}
+  input::placeholder,textarea::placeholder{color:#5e768d}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(63,217,198,.14)}
+  select{-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%233fd9c6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+  input[readonly]{color:var(--text-muted);background:rgba(4,16,32,.3);cursor:default}
+  textarea{resize:vertical;min-height:70px}
+  input[type=file]{padding:9px 13px;font-size:13px;color:var(--text-muted)}
+
+  .rows{display:flex;flex-direction:column;gap:12px}
+  .row-card{position:relative;border:1px solid var(--border);border-radius:11px;padding:18px 18px 16px;background:rgba(4,16,32,.28)}
+  .row-card .row-tag{position:absolute;top:-9px;left:14px;background:#0a2138;border:1px solid var(--border-strong);color:var(--teal);font-size:10px;letter-spacing:1.5px;font-weight:600;padding:2px 10px;border-radius:999px}
+  .row-del{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:7px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:center;transition:.2s;font-size:14px}
+  .row-del:hover{border-color:var(--danger);color:var(--danger)}
+  .addbtn{margin-top:14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:transparent;border:1px dashed var(--border-strong);color:var(--teal);font-family:inherit;font-size:12.5px;font-weight:500;letter-spacing:.5px;padding:9px 16px;border-radius:9px;transition:.2s}
+  .addbtn:hover{background:rgba(63,217,198,.08);border-style:solid}
+  .addbtn svg{width:14px;height:14px}
+
+  .note{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:12.5px;color:var(--teal-bright);background:rgba(63,217,198,.06);border:1px solid var(--border-strong);border-radius:10px;padding:11px 15px}
+  .note svg{width:16px;height:16px;flex:0 0 auto}
+
+  .subhead{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin:6px 0 12px}
+  .divider{height:1px;background:var(--border);margin:22px 0}
+
+  .actions{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:30px;flex-wrap:wrap;opacity:0;animation:rise .7s .70s forwards}
+  .btn{font-family:inherit;font-weight:600;font-size:13.5px;letter-spacing:.3px;cursor:pointer;border-radius:999px;padding:13px 26px;display:inline-flex;align-items:center;gap:10px;transition:.22s;border:1px solid transparent}
+  .btn svg{width:15px;height:15px;transition:transform .22s}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-ghost{background:transparent;border-color:var(--border-strong);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  .btn-primary{background:linear-gradient(95deg,var(--teal),var(--teal-dim));color:#06202e;box-shadow:0 8px 26px rgba(63,217,198,.26)}
+  .btn-primary:hover{box-shadow:0 12px 34px rgba(63,217,198,.4);transform:translateY(-1px)}
+
+  footer{margin-top:48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:20px;font-size:10px;letter-spacing:3px;color:var(--text-faint)}
+  .confirm{text-align:center;padding:46px 28px}
+  .confirm .ico{margin:0 auto 18px;width:62px;height:62px}
+  .confirm h2{font-weight:600;font-size:24px;margin-bottom:10px}
+  .confirm p{color:var(--text-muted);max-width:440px;margin:0 auto 6px;font-size:14px}
+  .confirm .bigref{color:var(--teal-bright);font-weight:600;letter-spacing:2px;font-size:18px;margin:16px 0}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @media (max-width:680px){h1{font-size:30px}.g2,.g3{grid-template-columns:1fr}.wrap{padding:32px 16px 60px}.arc{display:none}.section{padding:22px 18px}}
+
+  .wa-float{position:fixed;bottom:24px;right:24px;z-index:50;background:#25D366;color:#fff;width:56px;height:56px;padding:0;border-radius:50%;box-shadow:0 10px 30px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;transition:.25s ease-out;overflow:hidden}
+  .wa-float:hover{background:#20BA56;transform:scale(1.08)}
+  .wa-float:active{transform:scale(.95)}
+  .wa-float svg{width:24px;height:24px;flex:none;fill:currentColor}
+  .wa-float .wa-label{max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .3s ease-out,margin-left .3s ease-out;font-size:13px;font-weight:600}
+  .wa-float:hover .wa-label{max-width:160px;margin-left:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <svg class="arc" viewBox="0 0 320 200" fill="none">
+    <path d="M10 180 C 110 120, 210 70, 300 24" stroke="#3fd9c6" stroke-width="1.2" stroke-dasharray="3 5" opacity=".55"/>
+    <path d="M10 196 C 120 150, 220 110, 300 60" stroke="#3fd9c6" stroke-width="1" opacity=".3"/>
+    <g transform="translate(296,18) rotate(38)"><path d="M0 -7 L2 -2 L9 0 L2 2 L1 7 L-1 7 L-2 2 L-9 0 L-2 -2 Z" fill="#6cf0df"/></g>
+  </svg>
+
+  <header>
+    <a href="rtm-portal-landing" class="brand">
+      <div class="brand-mark">RTM</div>
+      <div><div class="brand-name">REMMITZ</div><div class="brand-sub">TRAVEL MANAGEMENT</div></div>
+    </a>
+    <div class="bible-tag">TRAVEL<br>REQUEST</div>
+  </header>
+
+  <div class="title-block">
+    <h1>Travel<span class="accent">Request</span></h1>
+    <div class="titledash"></div>
+    <p class="lede">Complete the details below and we'll prepare your quotation. Your request will go to the RT team for quoting, then to your line manager for approval with you copied on the quotation result.</p>
+  </div>
+
+  <div class="refbar">
+    <span class="ref-chip">Reference <b id="refnum">RTM-2026-0143</b></span>
+    <span class="step-chip">·&nbsp;&nbsp;STEP 1 OF 4 — SUBMIT</span>
+  </div>
+
+  <form id="rtmform" autocomplete="off">
+
+    <!-- REQUESTER DETAILS -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" stroke-linecap="round"/></svg></span>
+        <div><div class="sec-title">Requester details</div><div class="sec-note">Complete your travel request details</div></div>
+      </div>
+      <div class="grid g2">
+        <div class="field"><label>Employee name</label><input type="text" placeholder="Employee name"></div>
+        <div class="field"><label>Cost centre / Project</label><input type="text" placeholder="e.g. Technical"></div>
+        <div class="field"><label>Nature of travel</label>
+          <select><option value="">Select</option><option>Conference &amp; Meetings</option><option>Training</option><option>Technical</option><option>Project</option><option>Other</option></select>
+        </div>
+        <div class="field"><label>Conference / meeting / training details</label><input type="text" placeholder="Brief description"></div>
+      </div>
+    </div>
+
+    <!-- FLIGHTS -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" stroke-linejoin="round"/></svg></span>
+        <div><div class="sec-title">Flights</div><div class="sec-note">Add a leg for each flight you'll take</div></div>
+      </div>
+      <div class="rows" id="flightRows"></div>
+      <button type="button" class="addbtn" onclick="addFlight()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Add flight leg</button>
+    </div>
+
+    <!-- TRANSFERS -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 16V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8"/><path d="M5 16h14M7 16v2M17 16v2" stroke-linecap="round"/><circle cx="8" cy="13" r="1"/><circle cx="16" cy="13" r="1"/></svg></span>
+        <div><div class="sec-title">Transfers</div><div class="sec-note">Ground transport to and from airports</div></div>
+      </div>
+      <div class="rows" id="transferRows"></div>
+      <button type="button" class="addbtn" onclick="addTransfer()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Add transfer</button>
+    </div>
+
+    <!-- ACCOMMODATION -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 19V7m0 6h14a3 3 0 0 1 3 3v3M3 9h5a3 3 0 0 1 3 3v1" stroke-linecap="round"/></svg></span>
+        <div><div class="sec-title">Accommodation</div><div class="sec-note">Add each hotel stay</div></div>
+      </div>
+      <div class="rows" id="hotelRows"></div>
+      <button type="button" class="addbtn" onclick="addHotel()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>Add hotel</button>
+    </div>
+
+    <!-- MEALS -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 3v7a2 2 0 0 0 4 0V3M7 10v11M17 3c-1.5 0-2.5 1.8-2.5 4.5S15.5 12 17 12s2.5 0 2.5 0V3M17 12v9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="sec-title">Meals</div><div class="sec-note">Specify what you'll need included</div></div>
+      </div>
+      <div class="grid g2">
+        <div class="field"><label>Meals required</label><select><option value="">Select</option><option>Yes</option><option>No</option></select></div>
+        <div class="field"><label>State meal type</label>
+          <select><option value="">Select</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Breakfast &amp; Lunch</option><option>Breakfast &amp; Dinner</option><option>Lunch &amp; Dinner</option><option>All meals</option></select>
+        </div>
+      </div>
+      <div class="field mt"><label>Dietary requirements</label><input type="text" placeholder="e.g. vegetarian, halal, none"></div>
+    </div>
+
+    <!-- VEHICLE -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 8l2 5v5h-3v-2H6v2H3z" stroke-linejoin="round"/><circle cx="7" cy="15" r="1.3"/><circle cx="17" cy="15" r="1.3"/></svg></span>
+        <div><div class="sec-title">Vehicle hire / pool vehicle booking</div><div class="sec-note">Leave blank if not required</div></div>
+      </div>
+      <div class="grid g2">
+        <div class="field"><label>Pick-up point</label><input type="text" placeholder="Location"></div>
+        <div class="field"><label>Approximate time</label><input type="time"></div>
+        <div class="field"><label>Collection date</label><input type="date"></div>
+        <div class="field"><label>Return date</label><input type="date"></div>
+      </div>
+      <div class="field mt"><label>Specifics of vehicle type</label><textarea placeholder="e.g. compact, SUV, 7-seater, automatic"></textarea></div>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>Please ensure a copy of your valid driver's licence is supplied.</div>
+      <div class="field mt"><label>Upload driver's licence</label><input type="file" accept=".pdf,.jpg,.jpeg,.png"></div>
+    </div>
+
+    <!-- PEOPLE & CULTURE AUTHORISATION -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 18c2-4 5-7 9-9M14 6l4 4M12 8l4 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke-linecap="round"/></svg></span>
+        <div><div class="sec-title">People &amp; Culture authorisation</div><div class="sec-note">Internal HR sign-off</div></div>
+      </div>
+      <div class="subhead">Requested by</div>
+      <div class="grid g3">
+        <div class="field"><label>Name</label><input type="text" placeholder="Requester name"></div>
+        <div class="field"><label>Date</label><input type="date"></div>
+        <div class="field"><label>Signature</label><input type="file" accept=".jpg,.jpeg,.png,.pdf"></div>
+      </div>
+      <div class="divider"></div>
+      <div class="subhead">Authorised by</div>
+      <div class="grid g3">
+        <div class="field"><label>Name</label><input type="text" placeholder="Authoriser name"></div>
+        <div class="field"><label>Date</label><input type="date"></div>
+        <div class="field"><label>Signature</label><input type="file" accept=".jpg,.jpeg,.png,.pdf"></div>
+      </div>
+    </div>
+
+    <!-- LINE MANAGER AUTHORISATION -->
+    <div class="section">
+      <div class="sec-head">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="sec-title">Line manager authorisation</div><div class="sec-note">Mandatory: list your line manager's email address for quotation approval</div></div>
+      </div>
+      <div class="grid g2">
+        <div class="field"><label>Line manager name</label><input type="text" placeholder="Manager name"></div>
+        <div class="field"><label>Line manager email <span class="req">*</span></label><input type="email" id="mgrEmail" placeholder="manager@company.com" required></div>
+        <div class="field"><label>Date</label><input type="date"></div>
+        <div class="field"><label>Signature</label><input type="file" accept=".jpg,.jpeg,.png,.pdf"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-ghost">Save draft</button>
+      <button type="submit" class="btn btn-primary">Submit travel request
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </form>
+
+  <div id="confirmView"></div>
+
+  <footer>
+    <span>REMMITZ TRAVEL MANAGEMENT</span>
+    <span>RTM TRAVEL · RFQ PORTAL</span>
+  </footer>
+</div>
+
+<script>
+  function field(label,type,ph){return '<div class="field"><label>'+label+'</label><input type="'+type+'" placeholder="'+(ph||'')+'"></div>';}
+  function addFlight(){
+    const el=document.createElement('div');el.className='row-card';
+    el.innerHTML='<span class="row-tag">LEG</span><button type="button" class="row-del" onclick="this.parentElement.remove();renumber(\'flightRows\',\'LEG\')">&times;</button>'+
+      '<div class="grid g3">'+field('Date','date')+field('From','text','CPT')+field('To','text','City / code')+'</div>'+
+      '<div class="grid g2 mt">'+field('Approx. departure','time')+field('Approx. arrival','time')+'</div>';
+    document.getElementById('flightRows').appendChild(el);renumber('flightRows','LEG');
+  }
+  function addTransfer(){
+    const el=document.createElement('div');el.className='row-card';
+    el.innerHTML='<span class="row-tag">TRANSFER</span><button type="button" class="row-del" onclick="this.parentElement.remove();renumber(\'transferRows\',\'TRANSFER\')">&times;</button>'+
+      '<div class="grid g2">'+field('Date','date')+field('City','text')+field('Pick-up point','text','Address')+field('Drop-off point','text','Address')+'</div>'+
+      '<div class="grid mt">'+field('Flight time / number','text','e.g. QR1372')+'</div>';
+    document.getElementById('transferRows').appendChild(el);renumber('transferRows','TRANSFER');
+  }
+  function addHotel(){
+    const el=document.createElement('div');el.className='row-card';
+    el.innerHTML='<span class="row-tag">STAY</span><button type="button" class="row-del" onclick="this.parentElement.remove();renumber(\'hotelRows\',\'STAY\')">&times;</button>'+
+      '<div class="grid g2">'+field('Hotel name / vicinity','text')+field('City / town','text')+field('Check-in','date')+field('Check-out','date')+'</div>'+
+      '<div class="grid mt">'+field('Number of nights','number')+'</div>';
+    document.getElementById('hotelRows').appendChild(el);renumber('hotelRows','STAY');
+  }
+  function renumber(id,word){document.querySelectorAll('#'+id+' .row-tag').forEach((t,i)=>t.textContent=word+' '+(i+1));}
+
+  addFlight();addFlight();addTransfer();addTransfer();addHotel();
+
+  document.getElementById('rtmform').addEventListener('submit',function(e){
+    e.preventDefault();
+    const mgr=document.getElementById('mgrEmail');
+    if(!mgr.value){mgr.focus();mgr.style.borderColor='var(--danger)';return;}
+    const ref=document.getElementById('refnum').textContent;
+    this.style.display='none';document.querySelector('.actions').style.display='none';
+    document.getElementById('confirmView').innerHTML=
+      '<div class="section confirm" style="opacity:1;animation:rise .5s forwards">'+
+      '<span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'+
+      '<h2>Request submitted</h2>'+
+      '<p>Your completed request has been submitted to the RT team for quotation. The quotation will be returned to your line manager for approval, and you will be copied on the quotation result.</p>'+
+      '<div class="bigref">'+ref+'</div>'+
+      '<p>Track its status anytime under <b style="color:var(--text)">My requests</b>. You\'ll be emailed at each step.</p></div>';
+    document.getElementById('confirmView').scrollIntoView({behavior:'smooth'});
+  });
+</script>
+
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/27825746211?text=Hi%20Anthea,%20I'd%20like%20to%20enquire%20about%20RTM%20Travel's%20corporate%20services."
+       target="_blank"
+       rel="noopener noreferrer"
+       class="wa-float"
+       aria-label="Contact us on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.66.986 3.288 1.488 4.673 1.488 5.26 0 9.53-4.27 9.533-9.53.002-2.55-.992-4.947-2.798-6.756-1.807-1.809-4.205-2.805-6.761-2.806-5.263 0-9.534 4.271-9.537 9.531a9.49 9.49 0 001.442 4.96l-.953 3.479 3.56-.933zM16.65 13.91c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-2.42-1.21-3.99-2.22-5.46-4.75-.12-.2.12-.18.35-.43l.23-.28c.08-.1.12-.18.18-.3.06-.12.03-.22-.01-.3-.04-.08-.38-.92-.52-1.26-.14-.33-.29-.28-.38-.28h-.33c-.12 0-.32.05-.49.23-.17.18-.65.64-.65 1.56 0 .92.67 1.81.76 1.93.1.12 1.32 2.01 3.19 2.82.44.2 1.13.38 1.54.45.41.07.78.03 1.07-.01.32-.05 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+        </svg>
+        <span class="wa-label">WhatsApp Us</span>
+    </a>
+</body>
+</html>

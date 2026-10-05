@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Compress-Archive -Path * -DestinationPath \"..\\\\rtm-travel-deploy.zip\" -Force)",
+      "Bash(dir \"c:\\\\Users\\\\Deon\\\\Documents\\\\DB23 eCommerce\\\\Take it to market\\\\RTM Travel\" /b)",
+      "Bash(powershell -Command \"\\(Get-Item 'c:\\\\Users\\\\Deon\\\\Documents\\\\DB23 eCommerce\\\\Take it to market\\\\RTM Travel\\\\rtmtravel-deploy.zip'\\).Length / 1MB\")",
+      "Bash(powershell -Command \"Compress-Archive -Path 'dist\\\\*' -DestinationPath 'rtmtravel-deploy.zip' -Force\")",
+      "Bash(python scripts/fetch_page.py https://skillspassportsa.co.za)",
+      "Bash(python scripts/google_auth.py --check)",
+      "Bash(python -c ' *)",
+      "Bash(python seo_analyze.py)",
+      "Bash(del \"c:\\\\Users\\\\Deon\\\\Documents\\\\DB23 eCommerce\\\\Take it to market\\\\RTM Travel\\\\seo_analyze.py\")",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\Deon\\\\Documents\\\\DB23 eCommerce\\\\Take it to market\\\\RTM Travel\\\\seo_analyze.py\" -Confirm:$false)"
+    ]
+  }
+}

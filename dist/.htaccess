@@ -1,0 +1,75 @@
+# RTM Travel — cPanel / Apache configuration
+# -------------------------------------------------------
+
+Options -Indexes
+RewriteEngine On
+
+# ── 1. Force Canonical HTTPS + Non-WWW (Single 301 Hop) ──
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://rtmtravel.co.za%{REQUEST_URI} [R=301,L]
+
+# ── 2b. Strip trailing slash (except root) ──────────────
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} ^/(.+)/$
+RewriteRule ^ /%1 [R=301,L]
+
+# ── 3. Clean URLs (remove .html extension) ──────────────
+# Redirect requests for .html files to their clean equivalent
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# Internally rewrite clean URLs back to .html files
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Explicitly ensure /404 path returns HTTP 404 rather than 200
+RewriteRule ^404$ - [R=404,L]
+
+# Serve a proper 404 header for non-existent routes
+ErrorDocument 404 /404.html
+
+# ── 3b. Lead capture storage ────────────────────────────────────────────────
+# download.php writes the lead CSV and its signing key above the web root. If the
+# host does not allow that, it falls back to a directory here, which must never
+# be served.
+RedirectMatch 404 ^/rtm-private(/|$)
+
+# ── 4. Cache static assets ──────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                  "access plus 1 hour"
+  ExpiresByType text/css                   "access plus 1 year"
+  ExpiresByType application/javascript     "access plus 1 year"
+  ExpiresByType image/png                  "access plus 1 year"
+  ExpiresByType image/jpeg                 "access plus 1 year"
+  ExpiresByType image/webp                 "access plus 1 year"
+  ExpiresByType image/svg+xml              "access plus 1 year"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType font/woff2                 "access plus 1 year"
+</IfModule>
+
+# ── 5. Compression ──────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# ── 6. Security headers ─────────────────────────────────
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+
+  # Content Security Policy (permits self, GTM, Google Analytics, Google Fonts, data URIs)
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com;"
+
+  # Cross-Origin Policies
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+</IfModule>

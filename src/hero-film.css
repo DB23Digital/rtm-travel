@@ -1,0 +1,312 @@
+/* RTM Travel scroll-film hero. Brand-scoped tokens (navy + single teal accent,
+   Montserrat) live only inside #hero-section so the rest of the site keeps its
+   existing Inter/blue system untouched. */
+
+#hero-section {
+    --hf-navy: #0a1526;
+    --hf-navy-deep: #060c17;
+    --hf-accent: #3fd9c6;
+    --hf-ink: #eef6f5;
+    font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+    position: relative;
+    width: 100%;
+    background: var(--hf-navy);
+    /* Default (no-JS / reduced-motion / load-failure) baseline: static stack. */
+    height: auto;
+}
+
+#hero-section .hero-stage {
+    position: relative;
+    height: auto;
+    width: 100%;
+    background: var(--hf-navy);
+}
+
+#hero-section canvas#hero-canvas {
+    display: none;
+}
+
+#hero-section .hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(to bottom, rgba(6, 12, 23, 0.55) 0%, rgba(6, 12, 23, 0.1) 30%, rgba(6, 12, 23, 0.15) 60%, rgba(6, 12, 23, 0.85) 100%);
+    pointer-events: none;
+}
+
+#hero-section .hero-dots {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.05;
+    background-image: radial-gradient(circle, var(--hf-ink) 1px, transparent 1px);
+    background-size: 26px 26px;
+    pointer-events: none;
+}
+
+/* ---- Panels: default = static stacked sections with a poster background --- */
+#hero-section .hero-panel {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    min-height: 560px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    background-image: linear-gradient(to bottom, rgba(6, 12, 23, 0.15), rgba(6, 12, 23, 0.9)), var(--panel-bg);
+    background-size: cover;
+    background-position: center;
+    padding: 0 1.5rem 3.5rem;
+    opacity: 1;
+    transform: none;
+}
+
+#hero-section .hero-panel-inner {
+    width: min(100%, 640px);
+    margin: 0 auto;
+    text-align: left;
+    color: var(--hf-ink);
+}
+
+@media (min-width: 768px) {
+    #hero-section .hero-panel-inner {
+        margin: 0 0 0 auto;
+        margin-right: clamp(1rem, 6vw, 6rem);
+    }
+}
+
+#hero-section .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hf-accent);
+    margin-bottom: 0.9rem;
+}
+
+#hero-section .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--hf-accent);
+    box-shadow: 0 0 0 3px rgba(63, 217, 198, 0.2);
+}
+
+#hero-section .hero-panel h1,
+#hero-section .hero-panel h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    margin-bottom: 0.9rem;
+    text-wrap: balance;
+}
+
+#hero-section .hero-panel h1 {
+    font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+}
+
+#hero-section .hero-body {
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+    line-height: 1.6;
+    color: rgba(238, 246, 245, 0.82);
+    max-width: 46ch;
+    margin-bottom: 1.25rem;
+}
+
+#hero-section .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#hero-section .hero-tags span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(63, 217, 198, 0.35);
+    background: rgba(63, 217, 198, 0.08);
+    color: var(--hf-accent);
+}
+
+#hero-section .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    background: var(--hf-accent);
+    color: var(--hf-navy-deep);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 12px 30px rgba(63, 217, 198, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#hero-section .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(63, 217, 198, 0.35);
+}
+
+/* ---- Loader ------------------------------------------------------------ */
+#hero-section .hero-loader {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 3rem;
+    background: var(--hf-navy);
+    transition: opacity 0.5s ease;
+}
+
+#hero-section .hero-loader.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#hero-section .hero-loader-track {
+    width: min(220px, 60vw);
+    height: 2px;
+    background: rgba(238, 246, 245, 0.15);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+#hero-section .hero-loader-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--hf-accent);
+    transition: width 0.25s ease;
+}
+
+/* ---- Chapter readout ----------------------------------------------------- */
+#hero-section .hero-chapter-readout {
+    display: none;
+    position: fixed;
+    z-index: 40;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem 0.6rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(6, 12, 23, 0.55);
+    border: 1px solid rgba(238, 246, 245, 0.14);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#hero-section .hero-chapter-readout.is-visible {
+    opacity: 1;
+}
+
+#hero-section .hero-arc {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+#hero-section .hero-chapter-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 130px;
+}
+
+#hero-section .hero-chapter-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--hf-ink);
+    letter-spacing: 0.02em;
+}
+
+#hero-section .hero-chapter-track {
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(238, 246, 245, 0.18);
+    overflow: hidden;
+}
+
+#hero-section .hero-chapter-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--hf-accent);
+}
+
+/* ---- Seam fade into the next section -------------------------------- */
+#hero-section .hero-seam-fade {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40vh;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--seam-color, #453d37));
+}
+
+/* ---- Adaptive header (class toggled on <nav> by hero-film.js) --------- */
+nav.on-light,
+nav.on-light * {
+    color: #0f172a !important;
+}
+
+nav.on-light {
+    background: rgba(255, 255, 255, 0.82) !important;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+/* ---- Enhanced mode: JS confirms canvas + frame0 loaded ---------------- */
+#hero-section.hero-film-active {
+    height: calc(1190vh + 100vh);
+}
+
+#hero-section.hero-film-active .hero-stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#hero-section.hero-film-active canvas#hero-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#hero-section.hero-film-active .hero-panel {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    background-image: none;
+}
+
+#hero-section.hero-film-active .hero-panel.is-visible {
+    pointer-events: auto;
+}
+
+#hero-section.hero-film-active .hero-loader {
+    align-items: center;
+    padding-bottom: 0;
+}
