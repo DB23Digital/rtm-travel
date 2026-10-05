@@ -2,9 +2,22 @@
 <html lang="en-ZA">
 
 <head>
-    <!-- Hero A/B preview toggle: ?hero=classic shows the original hero, default is the scroll film. Runs before paint to avoid a flash of both. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- charset and viewport come first: the hero script below reads matchMedia, and
+         until the viewport meta is parsed phones report a 980px layout viewport. -->
+    <!-- Hero selection, before paint to avoid a flash of both. Phones (820px and
+         narrower, the same breakpoint hero-film.js uses for its 720 frame set) get
+         the classic hero; wider screens get the scroll film. ?hero=film or
+         ?hero=classic forces either one for QA and reveals the preview toggle. -->
     <script>
-      document.documentElement.dataset.hero = new URLSearchParams(location.search).get('hero') === 'classic' ? 'classic' : 'film';
+      (function () {
+        var forced = new URLSearchParams(location.search).get('hero');
+        var narrow = window.matchMedia('(max-width: 820px)').matches;
+        document.documentElement.dataset.hero =
+          forced === 'classic' || (forced !== 'film' && narrow) ? 'classic' : 'film';
+        if (forced) document.documentElement.dataset.heroPreview = '';
+      })();
     </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBPC12M3JF"></script>
@@ -15,8 +28,6 @@
 
       gtag('config', 'G-XBPC12M3JF');
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Corporate Travel Management Cape Town &amp; South Africa | RTM Travel</title>
     <meta name="description"
         content="Premium corporate travel management (TMC) for South African businesses, CFOs and Executives. ASATA and IATA accredited. We provide certainty, control, and 24/7 support." />
@@ -26,9 +37,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./assets/favicon.png">
 
-    <!-- Hero LCP image: preloaded because it's set via a CSS custom property on an element styled by an external stylesheet, invisible to the preload scanner otherwise -->
+    <!-- Hero LCP image (desktop only: phones get the classic hero, see the hero selection script above): preloaded because it's set via a CSS custom property on an element styled by an external stylesheet, invisible to the preload scanner otherwise -->
     <link rel="preload" as="image" href="./assets/hero-film/1280/frame_000.jpg" fetchpriority="high" media="(min-width: 821px)">
-    <link rel="preload" as="image" href="./assets/hero-film/720/frame_000.jpg" fetchpriority="high" media="(max-width: 820px)">
 
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="912e8d5282937ca7" />
@@ -59,8 +69,9 @@
       "@context": "https://schema.org",
       "@type": "TravelAgency",
       "@id": "https://rtmtravel.co.za/#business",
-      "name": "Remmitz Travel Management",
-      "alternateName": "RTM Travel",
+      "name": "RTM Travel",
+      "legalName": "Remmitz Travel Management CC",
+      "alternateName": "Remmitz Travel Management",
       "award": ["BEE Level 1 Contributor", "100% Female Owned Enterprise"],
       "url": "https://rtmtravel.co.za/",
       "logo": "https://rtmtravel.co.za/assets/Logo.webp",
@@ -72,13 +83,7 @@
         "@type": "PostalAddress",
         "addressLocality": "Cape Town",
         "addressRegion": "Western Cape",
-        "postalCode": "8001",
         "addressCountry": "ZA"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -33.9249,
-        "longitude": 18.4241
       },
       "openingHoursSpecification": [{
         "@type": "OpeningHoursSpecification",
@@ -110,7 +115,7 @@
         "https://www.linkedin.com/company/remmitz-travel-management/",
         "https://www.linkedin.com/in/anthea-ronne-37aa1811/",
         "https://www.instagram.com/rtm_travel/",
-        "https://www.google.com/search?kgmid=/g/11zdrsq7tp&hl=en-ZA&q=RTM+Travel"
+        "https://maps.google.com/?cid=11112407251051318975"
       ],
       "memberOf": [
         {
@@ -161,53 +166,6 @@
       "name": "RTM Travel",
       "publisher": { "@id": "https://rtmtravel.co.za/#business" },
       "inLanguage": "en-ZA"
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://rtmtravel.co.za/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is a Travel Management Company (TMC)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A Travel Management Company manages all aspects of business travel on behalf of a company. Unlike a standard travel agent, a TMC integrates with your corporate travel policy, provides detailed spend reporting, manages duty of care obligations, and offers 24/7 support for active travellers."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does RTM Travel differ from booking online?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Online platforms offer no policy enforcement, no consolidated reporting, no duty of care coverage, and no live support when disruptions occur. RTM Travel acts as an extension of your finance and operations teams — negotiating corporate rates, enforcing your travel policy, and providing 24/7 support when your employees are in transit."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is RTM Travel ASATA and IATA accredited?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. RTM Travel is fully accredited by ASATA (Association of Southern African Travel Agents) and IATA (International Air Transport Association), and operates in association with eTravel. This ensures the highest standards of financial security and professional conduct."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does RTM Travel provide 24/7 support?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. We provide 24/7 support for all active bookings. Whether a flight is cancelled, a traveller is stranded, or an emergency arises, our team is available around the clock to reroute, rebook, and resolve the situation."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What types of businesses does RTM Travel work with?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "RTM Travel works with South African businesses of all sizes — from growing SMEs with regular domestic travel to large corporates managing complex international programmes. Our service scales to your travel volume and complexity."
-          }
-        }
-      ]
     }
     ]
     </script>
@@ -267,12 +225,14 @@
 
     <!-- Hero preview toggle: client-facing A/B switch between the classic hero and the scroll film -->
     <div id="hero-version-toggle" class="fixed z-[60] top-20 right-4 flex items-center gap-1 p-1 rounded-full bg-rtm-dark/90 border border-white/15 backdrop-blur-lg text-xs font-medium shadow-lg">
-        <a href="?" class="hero-toggle-option px-3 py-1.5 rounded-full transition-colors">Scroll Film</a>
+        <a href="?hero=film" class="hero-toggle-option px-3 py-1.5 rounded-full transition-colors">Scroll Film</a>
         <a href="?hero=classic" class="hero-toggle-option px-3 py-1.5 rounded-full transition-colors">Classic</a>
     </div>
     <style>
+        /* Hidden from normal visitors; only shown when ?hero= is in the URL */
+        html:not([data-hero-preview]) #hero-version-toggle { display: none; }
         #hero-version-toggle .hero-toggle-option { color: rgba(255,255,255,0.55); }
-        html[data-hero="film"] #hero-version-toggle a[href="?"],
+        html[data-hero="film"] #hero-version-toggle a[href="?hero=film"],
         html[data-hero="classic"] #hero-version-toggle a[href="?hero=classic"] {
             background: #3fd9c6;
             color: #060c17;
@@ -347,8 +307,9 @@
             <!-- Opening title card, over the passenger window scene -->
             <div class="hero-panel" data-chapter-index="0" style="--panel-bg:url('./assets/hero-film/1280/frame_000.jpg')">
                 <div class="hero-panel-inner">
-                    <p class="hero-eyebrow">Somewhere over the clouds</p>
-                    <h1>This is what corporate travel looks like when nobody's managing it.</h1>
+                    <p class="hero-eyebrow">Corporate Travel Management · South Africa</p>
+                    <h1>Corporate Travel Management for South African Businesses</h1>
+                    <p class="hero-body">This is what corporate travel looks like when nobody's managing it — and how we fix it.</p>
                 </div>
             </div>
 
@@ -790,6 +751,9 @@
 
                 <div class="glass-card p-8 relative">
                     <form id="contact-form" class="space-y-6">
+                        <!-- Hidden lead attribution tracking -->
+                        <input type="hidden" id="source-page" name="source-page" value="">
+                        <input type="hidden" id="source-cta" name="source-cta" value="">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="first-name" class="block mb-2 text-sm font-medium text-gray-300">First Name</label>
@@ -900,7 +864,7 @@
                     <!-- Visible NAP block. Must stay character-for-character in step with the PostalAddress and telephone in the TravelAgency JSON-LD above, and with the Google Business Profile. -->
                     <address class="not-italic flex flex-col gap-1 text-gray-400 text-sm mt-6">
                         <span class="text-white font-semibold">Remmitz Travel Management</span>
-                        <span>Cape Town, Western Cape, 8001, South Africa</span>
+                        <span>Cape Town, Western Cape, South Africa</span>
                         <a href="tel:+27825746211" class="hover:text-white transition-colors">+27 82 574 6211</a>
                         <a href="mailto:anthea@rtmtravel.co.za" class="hover:text-white transition-colors">anthea@rtmtravel.co.za</a>
                         <span class="text-gray-500">Monday to Friday, 08:00&ndash;17:00 SAST. 24/7 support for travellers in transit.</span>
@@ -909,7 +873,7 @@
                     <div class="flex items-center gap-4 text-gray-400 text-sm mt-4">
                         <a href="https://www.linkedin.com/company/remmitz-travel-management/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
                         <a href="https://www.instagram.com/rtm_travel/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Instagram</a>
-                        <a href="https://www.google.com/search?kgmid=/g/11zdrsq7tp&hl=en-ZA&q=RTM+Travel" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Google</a>
+                        <a href="https://maps.google.com/?cid=11112407251051318975" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Google</a>
                     </div>
                 </div>
                 <div>

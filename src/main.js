@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroMode === 'classic' && classicCanvas) {
         const context = classicCanvas.getContext('2d');
         const frameCount = 40;
+        // Phones render frame 1 only: no 1.6 MB preload, no scroll scrub.
+        // 820px matches the hero routing in index.html and isNarrow in hero-film.js.
+        const scrubFrames = !window.matchMedia('(max-width: 820px)').matches;
         const currentFrame = { index: 0 };
         const images = [];
         const baseUrl = import.meta.env.BASE_URL || './';
@@ -53,13 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         stagger: 0.2,
                         ease: 'power2.out'
                     });
-                    const preloadRemainingFrames = () => {
-                        for (let next = 1; next < frameCount; next++) loadFrame(next);
-                    };
-                    if ('requestIdleCallback' in window) {
-                        window.requestIdleCallback(preloadRemainingFrames, { timeout: 1500 });
-                    } else {
-                        window.setTimeout(preloadRemainingFrames, 250);
+                    if (scrubFrames) {
+                        const preloadRemainingFrames = () => {
+                            for (let next = 1; next < frameCount; next++) loadFrame(next);
+                        };
+                        if ('requestIdleCallback' in window) {
+                            window.requestIdleCallback(preloadRemainingFrames, { timeout: 1500 });
+                        } else {
+                            window.setTimeout(preloadRemainingFrames, 250);
+                        }
                     }
                 }
             };
@@ -80,19 +85,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         resizeCanvas();
 
-        gsap.to(currentFrame, {
-            index: frameCount - 1,
-            snap: 'index',
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '#hero-section-classic',
-                start: 'top top',
-                end: '+=200%',
-                scrub: 0.5,
-                pin: true,
-            },
-            onUpdate: render
-        });
+        if (scrubFrames) {
+            gsap.to(currentFrame, {
+                index: frameCount - 1,
+                snap: 'index',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '#hero-section-classic',
+                    start: 'top top',
+                    end: '+=200%',
+                    scrub: 0.5,
+                    pin: true,
+                },
+                onUpdate: render
+            });
+        }
     }
 
     // Mobile menu toggle
@@ -143,9 +150,30 @@ document.addEventListener('DOMContentLoaded', () => {
             layer.style.transform = `${baseTransform} translateY(${scrolled * speed}px)`;
         });
     });
-    // Handle Contact Form Submission
+    // Handle Contact Form Lead Attribution & Submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
+        // Auto-populate hidden lead attribution fields
+        const sourcePageInput = document.getElementById('source-page');
+        const sourceCtaInput = document.getElementById('source-cta');
+        if (sourcePageInput) {
+            const urlParams = new URLSearchParams(window.location.search);
+            sourcePageInput.value = urlParams.get('source') || (document.referrer ? new URL(document.referrer, window.location.origin).pathname : window.location.pathname);
+            if (sourceCtaInput) {
+                sourceCtaInput.value = urlParams.get('cta') || 'homepage-direct';
+            }
+        }
+
+        // Track origin for any CTA button scrolling to #contact
+        document.querySelectorAll('a[href*="#contact"]').forEach(anchor => {
+            anchor.addEventListener('click', function () {
+                const cta = this.getAttribute('data-cta') || this.innerText.trim();
+                const src = this.getAttribute('data-source') || window.location.pathname;
+                if (sourcePageInput && src) sourcePageInput.value = src;
+                if (sourceCtaInput && cta) sourceCtaInput.value = cta;
+            });
+        });
+
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             

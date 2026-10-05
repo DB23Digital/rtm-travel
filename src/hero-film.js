@@ -76,7 +76,8 @@ function holdEnvelope(scrollVh, hold, fadeVh) {
 
 export function mountHeroFilm(section) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return; // stay on the static CSS fallback
+    const isDataSaver = typeof navigator !== 'undefined' && navigator.connection && (navigator.connection.saveData === true || /2g/.test(navigator.connection.effectiveType || ''));
+    if (prefersReducedMotion || isDataSaver) return; // stay on the static CSS fallback
 
     const canvas = section.querySelector('#hero-canvas');
     const stage = section.querySelector('.hero-stage');

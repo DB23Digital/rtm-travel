@@ -29,11 +29,16 @@ const RECIPIENT = 'anthea@rtmtravel.co.za';
 
 /**
  * Writable directory above the web root, for the lead CSV and the signing key.
- * Falls back to the script directory only if the parent is not writable, in
- * which case .htaccess denial is the remaining protection.
+ * Falls back to the script directory only if the parent is not writable. Every
+ * candidate gets a deny-all .htaccess, so the CSV (names, emails, IPs) is never
+ * served even when the fallback lands inside public_html.
  */
 function private_dir(): string
 {
+    static $resolved = null;
+    if ($resolved !== null) {
+        return $resolved;
+    }
     $candidates = [
         dirname($_SERVER['DOCUMENT_ROOT'] ?? __DIR__) . '/rtm-private',
         dirname(__DIR__) . '/rtm-private',
@@ -42,11 +47,27 @@ function private_dir(): string
     foreach ($candidates as $dir) {
         if (is_dir($dir) || @mkdir($dir, 0700, true)) {
             if (is_writable($dir)) {
-                return $dir;
+                $deny = $dir . '/.htaccess';
+                if (!file_exists($deny)) {
+                    @file_put_contents($deny, "Require all denied\n", LOCK_EX);
+                }
+                return $resolved = $dir;
             }
         }
     }
-    return sys_get_temp_dir();
+    return $resolved = sys_get_temp_dir();
+}
+
+/**
+ * Append a line to download-errors.log in the private directory, and to the PHP
+ * error log as a second place to find it. For failures the visitor never sees.
+ * No names or emails in these lines: cPanel often writes error_log into public_html.
+ */
+function log_failure(string $message): void
+{
+    $line = gmdate('c') . ' ' . $message;
+    error_log('download.php: ' . $line);
+    @file_put_contents(private_dir() . '/download-errors.log', $line . "\n", FILE_APPEND | LOCK_EX);
 }
 
 function signing_secret(): string
@@ -63,7 +84,11 @@ function signing_secret(): string
         }
     }
     $secret = bin2hex(random_bytes(32));
-    @file_put_contents($file, $secret, LOCK_EX);
+    if (@file_put_contents($file, $secret, LOCK_EX) === false) {
+        // Without a persisted key every request mints a new one, so links signed
+        // on POST fail verification on GET and every download returns 403.
+        log_failure("could not write signing key to $file; signed links will not verify");
+    }
     @chmod($file, 0600);
     return $secret;
 }
@@ -155,6 +180,9 @@ $row = [
 $csv = private_dir() . '/template-leads.csv';
 $new = !file_exists($csv);
 $fh = @fopen($csv, 'a');
+if (!$fh) {
+    log_failure("could not open $csv; lead not recorded in CSV (the notification email still carries it)");
+}
 if ($fh) {
     if (flock($fh, LOCK_EX)) {
         if ($new) {
@@ -173,12 +201,15 @@ $body .= "Work email: $email\n";
 $body .= "Company: $company\n";
 $body .= "POPIA consent: yes, given at " . gmdate('Y-m-d H:i') . " UTC\n";
 $body .= "Source page: {$row[6]}\n";
-@mail(
+$mailed = @mail(
     RECIPIENT,
     "Template download: $name ($company)",
     $body,
     "From: RTM Travel Website <no-reply@rtmtravel.co.za>\r\nReply-To: $name <$email>"
 );
+if (!$mailed) {
+    log_failure("mail() to " . RECIPIENT . " failed; the lead is in the CSV with this timestamp");
+}
 
 $exp = time() + LINK_TTL;
 json_out(200, [
