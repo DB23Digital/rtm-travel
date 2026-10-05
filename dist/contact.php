@@ -29,6 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contactNumber = strip_tags(trim($data["contact-number"] ?? ''));
         $subjectSelection = strip_tags(trim($data["subject"] ?? ''));
         $message = strip_tags(trim($data["message"] ?? ''));
+        $sourcePage = strip_tags(trim($data["source-page"] ?? 'Homepage Direct'));
+        $sourceCta = strip_tags(trim($data["source-cta"] ?? 'General Form'));
     } else {
         // Standard form submit (fallback)
         $firstName = strip_tags(trim($_POST["First_name"] ?? $_POST["first-name"] ?? ''));
@@ -38,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contactNumber = strip_tags(trim($_POST["Contact_number"] ?? $_POST["contact-number"] ?? ''));
         $subjectSelection = strip_tags(trim($_POST["Subject"] ?? $_POST["subject"] ?? ''));
         $message = strip_tags(trim($_POST["Message"] ?? $_POST["message"] ?? ''));
+        $sourcePage = strip_tags(trim($_POST["Source_page"] ?? $_POST["source-page"] ?? 'Homepage Direct'));
+        $sourceCta = strip_tags(trim($_POST["Source_cta"] ?? $_POST["source-cta"] ?? 'General Form'));
     }
 
     // Check that data was sent to the mailer
@@ -58,7 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_content .= "Company: $company\n";
     $email_content .= "Email: $email\n";
     $email_content .= "Contact Number: $contactNumber\n";
-    $email_content .= "Subject: $subjectSelection\n\n";
+    $email_content .= "Subject: $subjectSelection\n";
+    $email_content .= "Source Page: $sourcePage\n";
+    $email_content .= "Campaign / CTA: $sourceCta\n\n";
     $email_content .= "Message:\n$message\n";
 
     // Build the email headers.

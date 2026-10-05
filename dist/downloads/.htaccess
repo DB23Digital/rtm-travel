@@ -7,3 +7,7 @@
   Order deny,allow
   Deny from all
 </IfModule>
+
+# Old bookmarked links land on the gated article instead of a raw Apache error.
+# The target sits outside this denied directory, so Apache can serve it.
+ErrorDocument 403 /corporate-travel-policy-template
