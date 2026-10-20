@@ -17,6 +17,13 @@ Disallow: /
 User-agent: anthropic-ai
 Disallow: /
 
+# Search and user-triggered assistant crawlers, named so the permission is explicit.
+User-agent: ChatGPT-User
+User-agent: Perplexity-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+Allow: /
+
 User-agent: *
 Allow: /
 
